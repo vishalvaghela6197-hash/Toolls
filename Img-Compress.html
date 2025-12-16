@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Image Compression Tool – Fast & SEO Optimized</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Free online image compression tool. Compress and optimize images with adjustable quality for web and mobile. Fast, responsive, and SEO-friendly." />
+  <meta name="keywords" content="image compression, compress images online, image optimizer, reduce image size, SEO images" />
+  <meta name="author" content="Your Brand Name" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Online Image Compression Tool" />
+  <meta property="og:description" content="Compress images easily with adjustable quality. Fast and responsive image optimizer." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google AdSense (Replace AD_UNIT_ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f9fafb;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        grid-template-columns: 3fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,.05);
+    }
+
+    input[type=file] {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    input[type=range] {
+      width: 100%;
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .preview img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .ad-slot {
+      min-height: 250px;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 1rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Image Compression Tool</h1>
+  <p>Optimize images for web & mobile instantly</p>
+</header>
+
+<main>
+  <!-- Main Tool -->
+  <section class="card">
+    <h2>Compress Your Image</h2>
+    <input type="file" id="imageInput" accept="image/*" />
+
+    <label for="quality">Compression Level: <strong><span id="qualityValue">80</span>%</strong></label>
+    <input type="range" id="quality" min="10" max="100" value="80" />
+
+    <button onclick="compressImage()">Compress Image</button>
+
+    <div class="preview">
+      <h3>Compressed Preview</h3>
+      <img id="outputImage" alt="Compressed image preview" />
+      <a id="downloadLink" style="display:none" download="compressed-image.jpg">Download Image</a>
+    </div>
+  </section>
+
+  <!-- Sidebar Ads -->
+  <aside class="card">
+    <h3>Sponsored</h3>
+
+    <!-- AdSense Ad Slot -->
+    <div class="ad-slot">
+      <!-- Replace data-ad-slot with your Ad Unit ID -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <p>© 2025 Image Compression Tool · Fast · Secure · SEO Optimized</p>
+</footer>
+
+<script>
+  const qualitySlider = document.getElementById('quality');
+  const qualityValue = document.getElementById('qualityValue');
+
+  qualitySlider.addEventListener('input', () => {
+    qualityValue.textContent = qualitySlider.value;
+  });
+
+  function compressImage() {
+    const fileInput = document.getElementById('imageInput');
+    const outputImage = document.getElementById('outputImage');
+    const downloadLink = document.getElementById('downloadLink');
+
+    if (!fileInput.files.length) return alert('Please select an image');
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        const quality = qualitySlider.value / 100;
+        const compressedData = canvas.toDataURL('image/jpeg', quality);
+
+        outputImage.src = compressedData;
+        downloadLink.href = compressedData;
+        downloadLink.style.display = 'inline-block';
+      };
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  }
+</script>
+
+</body>
+</html>
